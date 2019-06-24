@@ -12,7 +12,7 @@ const Index = () => (
     <Typography color="textSecondary" gutterBottom>
       Dev tools for devs.
     </Typography>
-    <Typography color="textSecondary" variant="body2" gutterBottom>
+    <Typography color="textSecondary" gutterBottom>
       Personal project made while playing with NextJS and serverless SSR.
     </Typography>
     <ToolCupboard />
