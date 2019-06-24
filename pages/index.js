@@ -1,17 +1,23 @@
-import Link from "next/link";
-import Header from "../components/header";
+import React from 'react';
+import Typography from '@material-ui/core/Typography';
 
-function Index() {
-  return (
-    <main>
-      <Header />
-      <section>
-        <Link href="/about">
-          <a>Go to About Me</a>
-        </Link>
-      </section>
-    </main>
-  );
-}
+import Layout from '../src/components/Layout';
+import ToolCupboard from "../src/components/ToolCupboard";
+
+const Index = () => (
+  <Layout>
+    <Typography variant="h4" component="h1" gutterBottom>
+      _> Fix That Bug
+    </Typography>
+    <Typography color="textSecondary" gutterBottom>
+      Dev tools for devs.
+    </Typography>
+    <Typography color="textSecondary" variant="body2" gutterBottom>
+      Personal project made while playing with NextJS and serverless SSR.
+    </Typography>
+    <ToolCupboard />
+  </Layout>
+);
+
 
 export default Index;
