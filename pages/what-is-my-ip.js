@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import fetch from 'isomorphic-unfetch';
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import RefreshIcon from '@material-ui/icons/Refresh';
-import Layout from '../src/components/Layout';
+import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import fetch from "isomorphic-unfetch";
+import Divider from "@material-ui/core/Divider";
+import Typography from "@material-ui/core/Typography";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Button from "@material-ui/core/Button";
+import RefreshIcon from "@material-ui/icons/Refresh";
+import Layout from "../src/components/Layout";
 import ToolCupboard from "../src/components/ToolCupboard";
 
 const useStyles = makeStyles(theme => ({
@@ -25,24 +25,23 @@ const useStyles = makeStyles(theme => ({
 
 const fetchIps = async () => {
   let ipv4 = {};
-  const ipv4Fetch = await fetch('https://api.ipify.org?format=json');
+  const ipv4Fetch = await fetch("https://api.ipify.org?format=json");
 
   ipv4Fetch.ok
-  ? ipv4 = await ipv4Fetch.json()
-  : ipv4.error = `Could not fetch IP [${ipv4Fetch.status}]`
+    ? (ipv4 = await ipv4Fetch.json())
+    : (ipv4.error = `Could not fetch IP [${ipv4Fetch.status}]`);
 
   let ipv6 = {};
   const ipv6Fetch = await fetch("https://api6.ipify.org?format=json");
-  
+
   ipv6Fetch.ok
-  ? ipv6 = await ipv6Fetch.json()
-  : ipv6.error = `Could not fetch IP [${ipv6Fetch.status}]`
+    ? (ipv6 = await ipv6Fetch.json())
+    : (ipv6.error = `Could not fetch IP [${ipv6Fetch.status}]`);
 
   return {
     ipv4: ipv4.error || ipv4.ip,
     ipv6: ipv6.error || ipv6.ip
   };
-
 };
 
 const WhatIsMyIp = () => {
@@ -52,24 +51,28 @@ const WhatIsMyIp = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { ipv4, ipv6 } = await fetchIps()
+      const { ipv4, ipv6 } = await fetchIps();
       setIpv4(ipv4);
-      setIpv6(ipv6)
-    }
+      setIpv6(ipv6);
+    };
     fetchData();
   }, []);
 
   const handleRefresh = async () => {
     setIpv4("...");
-    setIpv6("...")
+    setIpv6("...");
 
-    const { ipv4, ipv6 } = await fetchIps()
-      setIpv4(ipv4);
-      setIpv6(ipv6)
-  }
+    const { ipv4, ipv6 } = await fetchIps();
+    setIpv4(ipv4);
+    setIpv6(ipv6);
+  };
 
   return (
-    <Layout title="What is my IP">
+    <Layout
+      title="What is my IP"
+      description="IPv4 Address, IPv6 Address, IP Address Lookup"
+      keywords="ip, what is my ip, my ip, my ip address, ip address, ipv4, ipv6"
+    >
       <Card className={classes.card}>
         <CardContent>
           <div className={classes.section}>
@@ -77,7 +80,7 @@ const WhatIsMyIp = () => {
               Your IP Addresses:
             </Typography>
           </div>
-          <Divider variant="middle"/>
+          <Divider variant="middle" />
           <div className={classes.section}>
             <Typography color="textSecondary">IPv4 Address:</Typography>
             <Typography variant="h6" gutterBottom>
@@ -89,16 +92,20 @@ const WhatIsMyIp = () => {
             <Typography variant="h6" gutterBottom>
               {ipv6}
             </Typography>
-            <Button onClick={handleRefresh} color="primary" size="small"><RefreshIcon className={classes.icon} />Refresh</Button>
+            <Button onClick={handleRefresh} color="primary" size="small">
+              <RefreshIcon className={classes.icon} />
+              Refresh
+            </Button>
           </div>
           <Typography color="textSecondary" variant="body2">
-            This is your public facing IP assigned by your ISP. You will share the same Public IP with devices connected to the same router.
+            This is your public facing IP assigned by your ISP. You will share
+            the same Public IP with devices connected to the same router.
           </Typography>
         </CardContent>
       </Card>
       <ToolCupboard />
     </Layout>
   );
-}
+};
 
 export default WhatIsMyIp;
