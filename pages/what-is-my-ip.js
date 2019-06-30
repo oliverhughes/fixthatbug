@@ -24,15 +24,23 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const fetchIps = async () => {
+  let ipv4 = {};
   const ipv4Fetch = await fetch('https://api.ipify.org?format=json');
-  const ipv4 = await ipv4Fetch.json();
 
+  ipv4Fetch.ok
+  ? ipv4 = await ipv4Fetch.json()
+  : ipv4.error = `Could not fetch IP [${ipv4Fetch.status}]`
+
+  let ipv6 = {};
   const ipv6Fetch = await fetch("https://api6.ipify.org?format=json");
-  const ipv6 = await ipv6Fetch.json();
+  
+  ipv6Fetch.ok
+  ? ipv6 = await ipv6Fetch.json()
+  : ipv6.error = `Could not fetch IP [${ipv6Fetch.status}]`
 
   return {
-    ipv4: ipv4.ip,
-    ipv6: ipv6.ip
+    ipv4: ipv4.error || ipv4.ip,
+    ipv6: ipv6.error || ipv6.ip
   };
 
 };
