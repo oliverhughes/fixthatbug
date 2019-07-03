@@ -12,6 +12,9 @@ const useStyles = makeStyles(theme => ({
     minWidth: 275,
     marginBottom: theme.spacing(4)
   },
+  button: {
+    marginTop: theme.spacing(1)
+  },
   icon: {
     marginRight: theme.spacing(1)
   },
@@ -43,7 +46,13 @@ const DisplayMyIp = ({ ipv4, ipv6, handleRefresh }) => {
           <Typography variant="h6" gutterBottom>
             {ipv6}
           </Typography>
-          <Button onClick={handleRefresh} color="primary" size="small">
+          <Button
+            className={classes.button}
+            onClick={handleRefresh}
+            variant="outlined"
+            color="primary"
+            size="small"
+          >
             <RefreshIcon className={classes.icon} />
             Refresh
           </Button>
