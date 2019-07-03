@@ -4,6 +4,7 @@ import Head from "next/head";
 
 const Header = ({ title, description, keywords }) => (
   <Head>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.png" />
     <title>{title}</title>
     {description && (
       <meta name="description" content={description} key="description" />
