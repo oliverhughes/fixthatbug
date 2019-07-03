@@ -1,19 +1,23 @@
-import React from 'react';
+import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import Toolbar from '@material-ui/core/Toolbar';
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import Toolbar from "@material-ui/core/Toolbar";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 1
+  },
+  appBar: {
+    background: "#40E0D0",
+    background: "linear-gradient(to left, #f7ff00, #db36a4)"
   },
   menuButton: {
-    marginRight: theme.spacing(2),
-  },
+    marginRight: theme.spacing(2)
+  }
 }));
 
 const Navbar = ({ drawerToggle, title }) => {
@@ -21,7 +25,7 @@ const Navbar = ({ drawerToggle, title }) => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="default">
+      <AppBar className={classes.appBar} position="static">
         <Toolbar>
           <IconButton
             edge="start"
@@ -32,23 +36,22 @@ const Navbar = ({ drawerToggle, title }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="h1"> 
-            { title }
+          <Typography variant="h6" component="h1">
+            {title}
           </Typography>
         </Toolbar>
       </AppBar>
     </div>
   );
-}
+};
 
 Navbar.defaultProps = {
   title: "Fix That Bug"
-}
+};
 
 Navbar.propTypes = {
   drawerToggle: PropTypes.func.isRequired,
   title: PropTypes.string
-}
-
+};
 
 export default Navbar;
