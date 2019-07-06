@@ -11,10 +11,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
   },
-  appBar: {
-    background: "#40E0D0",
-    background: "linear-gradient(to left, #f7ff00, #db36a4)"
-  },
   menuButton: {
     marginRight: theme.spacing(2)
   }
@@ -25,7 +21,7 @@ const Navbar = ({ drawerToggle, title }) => {
 
   return (
     <div className={classes.root}>
-      <AppBar className={classes.appBar} position="static">
+      <AppBar className={classes.appBar} color="secondary" position="static">
         <Toolbar>
           <IconButton
             edge="start"
