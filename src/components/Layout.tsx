@@ -1,9 +1,10 @@
+import Box from "@material-ui/core/Box";
+import Container from "@material-ui/core/Container";
 import React, { useState } from "react";
+import { Event } from "../types/";
+import AppDrawer from "./Drawer";
 import Header from "./Header";
 import Navbar from "./Navbar";
-import AppDrawer from "./Drawer";
-import Container from "@material-ui/core/Container";
-import Box from "@material-ui/core/Box";
 
 const Layout = ({
   children,
@@ -15,7 +16,7 @@ const Layout = ({
 }) => {
   const [drawerOpen, toggleDrawer] = useState(false);
 
-  const handleDrawerToggle = open => event => {
+  const handleDrawerToggle = (open: boolean) => (event: Event) => {
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")

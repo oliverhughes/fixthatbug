@@ -915,6 +915,14 @@
     prop-types "^15.7.2"
     react-is "^16.8.0"
 
+"@types/material-ui@^0.21.7":
+  version "0.21.7"
+  resolved "https://registry.yarnpkg.com/@types/material-ui/-/material-ui-0.21.7.tgz#2a4ab77a56a16adef044ba607edde5214151a5d8"
+  integrity sha512-OxGu+Jfm3d8IVYu5w2cqosSFU+8KJYCeVjw1jLZ7DzgoE7KpSFFpbDJKWhV1FAf/HEQXzL1IpX6PmLwINlE4Xg==
+  dependencies:
+    "@types/react" "*"
+    "@types/react-addons-linked-state-mixin" "*"
+
 "@types/node@^12.7.2":
   version "12.7.2"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.7.2.tgz#c4e63af5e8823ce9cc3f0b34f7b998c2171f0c44"
@@ -929,6 +937,13 @@
   version "15.7.1"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.1.tgz#f1a11e7babb0c3cad68100be381d1e064c68f1f6"
   integrity sha512-CFzn9idOEpHrgdw8JsoTkaDDyRWk1jrzIV8djzcgpq0y9tG4B4lFT+Nxh52DVpDXV+n4+NPNv7M1Dj5uMp6XFg==
+
+"@types/react-addons-linked-state-mixin@*":
+  version "0.14.20"
+  resolved "https://registry.yarnpkg.com/@types/react-addons-linked-state-mixin/-/react-addons-linked-state-mixin-0.14.20.tgz#5f0cd884ace049d538982a3b254f4807b9395eb6"
+  integrity sha512-17M8ymjR/vvyaQnLNuLSQipxtUrxaIq19phbWKKz1drIXeVQx+AnqMVVVIClno/gPheJWcLVCbf+yXXbbRalIg==
+  dependencies:
+    "@types/react" "*"
 
 "@types/react-transition-group@^2.0.16":
   version "2.9.2"

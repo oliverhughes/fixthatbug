@@ -1,11 +1,12 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Divider from "@material-ui/core/Divider";
-import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
+import Divider from "@material-ui/core/Divider";
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 import RefreshIcon from "@material-ui/icons/Refresh";
+import React from "react";
+import { DisplayMyIpProps } from "../types/";
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -23,32 +24,32 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const DisplayMyIp = ({ ipv4, ipv6, handleRefresh }) => {
-  const classes = useStyles();
+const DisplayMyIp = ({ ipv4, ipv6, handleRefresh }: DisplayMyIpProps) => {
+  const classes = useStyles({});
 
   return (
     <Card className={classes.card}>
       <CardContent>
         <div className={classes.section}>
-          <Typography variant="h5" gutterBottom>
+          <Typography variant="h5" gutterBottom={true}>
             Your IP Addresses:
           </Typography>
         </div>
         <Divider variant="middle" />
         <div className={classes.section}>
           <Typography color="textSecondary">IPv4 Address:</Typography>
-          <Typography variant="h6" gutterBottom>
+          <Typography variant="h6" gutterBottom={true}>
             {ipv4}
           </Typography>
         </div>
         <div className={classes.section}>
           <Typography color="textSecondary">IPv6 Address:</Typography>
-          <Typography variant="h6" gutterBottom>
+          <Typography variant="h6" gutterBottom={true}>
             {ipv6}
           </Typography>
           <Button
             className={classes.button}
-            onClick={handleRefresh}
+            onClick={() => handleRefresh}
             variant="outlined"
             color="primary"
             size="small"

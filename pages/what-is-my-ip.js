@@ -31,9 +31,15 @@ const WhatIsMyIp = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { ipv4, ipv6 } = await fetchIps();
-      setIpv4(ipv4);
-      setIpv6(ipv6);
+      try {
+        const { ipv4, ipv6 } = await fetchIps();
+        setIpv4(ipv4);
+        setIpv6(ipv6);
+      } catch (err) {
+        setIpv4("Could not retrieve IPs :(");
+        setIpv6("Could not retrieve IPs :(");
+        console.error("Could not retrieve IPs");
+      }
     };
     fetchData();
   }, []);
@@ -41,7 +47,7 @@ const WhatIsMyIp = () => {
   const handleRefresh = async () => {
     setIpv4("...");
     setIpv6("...");
-
+    console.log("Hanlding rfreshhh");
     const { ipv4, ipv6 } = await fetchIps();
     setIpv4(ipv4);
     setIpv6(ipv6);

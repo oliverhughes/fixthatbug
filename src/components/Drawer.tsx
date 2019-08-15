@@ -1,31 +1,31 @@
-import React from 'react';
+import Divider from "@material-ui/core/Divider";
+import Drawer from "@material-ui/core/Drawer";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import DevicesIcon from "@material-ui/icons/Devices";
+import InfoIcon from "@material-ui/icons/Info";
+import Link from "next/link";
 import PropTypes from "prop-types";
-import Link from 'next/link';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import DevicesIcon from '@material-ui/icons/Devices';
-import InfoIcon from '@material-ui/icons/Info';
+import React from "react";
 
 const useStyles = makeStyles(theme => ({
   list: {
-    width: 250,
+    width: 250
   },
   fullList: {
-    width: 'auto',
+    width: "auto"
   },
   title: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(2)
   }
 }));
 
 const AppDrawer = ({ drawerOpen, drawerToggle }) => {
-  const classes = useStyles();
+  const classes = useStyles({});
 
   return (
     <Drawer open={drawerOpen} onClose={drawerToggle(false)}>
@@ -43,14 +43,18 @@ const AppDrawer = ({ drawerOpen, drawerToggle }) => {
         <Divider />
         <List>
           <Link href="/what-is-my-ip">
-            <ListItem button >
-              <ListItemIcon><DevicesIcon /></ListItemIcon>
+            <ListItem button={true}>
+              <ListItemIcon>
+                <DevicesIcon />
+              </ListItemIcon>
               <ListItemText primary="What is my IP" />
             </ListItem>
           </Link>
           <Link href="/">
-            <ListItem button >
-              <ListItemIcon><InfoIcon /></ListItemIcon>
+            <ListItem button={true}>
+              <ListItemIcon>
+                <InfoIcon />
+              </ListItemIcon>
               <ListItemText primary="About" />
             </ListItem>
           </Link>
@@ -58,11 +62,11 @@ const AppDrawer = ({ drawerOpen, drawerToggle }) => {
       </div>
     </Drawer>
   );
-}
+};
 
 AppDrawer.propTypes = {
   drawerOpen: PropTypes.bool.isRequired,
   drawerToggle: PropTypes.func.isRequired
-}
+};
 
 export default AppDrawer;

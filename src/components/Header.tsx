@@ -1,8 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
 import Head from "next/head";
+import PropTypes from "prop-types";
+import React from "react";
+import { HeaderProps } from "../types/";
 
-const Header = ({ title, description, keywords }) => (
+const Header = ({ title, description, keywords }: HeaderProps) => (
   <Head>
     <link rel="icon" type="image/x-icon" href="/static/favicon.png" />
     <title>{title}</title>
