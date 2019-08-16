@@ -49,7 +49,7 @@ const DisplayMyIp = ({ ipv4, ipv6, handleRefresh }: DisplayMyIpProps) => {
           </Typography>
           <Button
             className={classes.button}
-            onClick={() => handleRefresh}
+            onClick={() => handleRefresh()}
             variant="outlined"
             color="primary"
             size="small"

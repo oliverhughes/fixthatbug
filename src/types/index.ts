@@ -5,6 +5,11 @@ export interface Event {
   key: string;
 }
 
+export interface AppDrawerProps {
+  drawerOpen: boolean;
+  drawerToggle: Function;
+}
+
 export interface DisplayMyIpProps {
   ipv4: string;
   ipv6: string;
@@ -18,7 +23,7 @@ export interface HeaderProps {
 }
 
 export interface LayoutProps {
-  children: Node;
+  children: JSX.Element;
   contentWidth: BsBreakpoints;
   showNav: boolean;
   title: string;

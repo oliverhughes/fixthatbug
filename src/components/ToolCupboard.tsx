@@ -6,9 +6,10 @@ import Typography from "@material-ui/core/Typography";
 import Link from "next/link";
 import React from "react";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   card: {
-    minWidth: 275
+    minWidth: 275,
+    marginBottom: theme.spacing(4)
   },
   bullet: {
     display: "inline-block",
@@ -18,7 +19,7 @@ const useStyles = makeStyles({
   title: {
     fontSize: 14
   }
-});
+}));
 
 export default function ToolCupboard() {
   const classes = useStyles({});

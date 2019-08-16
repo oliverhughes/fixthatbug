@@ -1,8 +1,6 @@
-import React from 'react';
-import Typography from '@material-ui/core/Typography';
-
-import Layout from '../src/components/Layout';
-import ToolCupboard from "../src/components/ToolCupboard";
+import React from "react";
+import Typography from "@material-ui/core/Typography";
+import Layout from "../src/components/Layout";
 
 const Index = () => (
   <Layout>
@@ -15,9 +13,7 @@ const Index = () => (
     <Typography color="textSecondary" gutterBottom>
       Personal project made while playing with NextJS and serverless SSR.
     </Typography>
-    <ToolCupboard />
   </Layout>
 );
-
 
 export default Index;

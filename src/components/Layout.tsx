@@ -2,9 +2,11 @@ import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import React, { useState } from "react";
 import { Event } from "../types/";
+import { LayoutProps } from "../types/";
 import AppDrawer from "./Drawer";
 import Header from "./Header";
 import Navbar from "./Navbar";
+import ToolCupboard from "./ToolCupboard";
 
 const Layout = ({
   children,
@@ -13,7 +15,7 @@ const Layout = ({
   title,
   description,
   keywords
-}) => {
+}: LayoutProps) => {
   const [drawerOpen, toggleDrawer] = useState(false);
 
   const handleDrawerToggle = (open: boolean) => (event: Event) => {
@@ -33,6 +35,7 @@ const Layout = ({
       <AppDrawer drawerToggle={handleDrawerToggle} drawerOpen={drawerOpen} />
       <Container maxWidth={contentWidth}>
         <Box my={4}>{children}</Box>
+        <ToolCupboard />
       </Container>
     </>
   );
