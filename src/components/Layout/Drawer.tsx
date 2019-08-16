@@ -24,6 +24,19 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const links = [
+  {
+    label: "What is my IP",
+    href: "/what-is-my-ip",
+    icon: <DevicesIcon />
+  },
+  {
+    label: "About",
+    href: "/",
+    icon: <InfoIcon />
+  }
+];
+
 type Props = { drawerOpen: boolean; drawerToggle: Function };
 
 const AppDrawer = ({ drawerOpen, drawerToggle }: Props) => {
@@ -44,22 +57,14 @@ const AppDrawer = ({ drawerOpen, drawerToggle }: Props) => {
         </Link>
         <Divider />
         <List>
-          <Link href="/what-is-my-ip">
-            <ListItem button={true}>
-              <ListItemIcon>
-                <DevicesIcon />
-              </ListItemIcon>
-              <ListItemText primary="What is my IP" />
-            </ListItem>
-          </Link>
-          <Link href="/">
-            <ListItem button={true}>
-              <ListItemIcon>
-                <InfoIcon />
-              </ListItemIcon>
-              <ListItemText primary="About" />
-            </ListItem>
-          </Link>
+          {links.map(({ label, href, icon }) => (
+            <Link key={href} href={href}>
+              <ListItem button={true}>
+                <ListItemIcon>{icon}</ListItemIcon>
+                <ListItemText primary={label} />
+              </ListItem>
+            </Link>
+          ))}
         </List>
       </div>
     </Drawer>
