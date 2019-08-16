@@ -6,7 +6,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import React from "react";
-import { DisplayMyIpProps } from "../types/";
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -24,7 +23,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const DisplayMyIp = ({ ipv4, ipv6, handleRefresh }: DisplayMyIpProps) => {
+type Props = { ipv4: string; ipv6: string; handleRefresh: Function };
+
+const DisplayMyIp = ({ ipv4, ipv6, handleRefresh }: Props) => {
   const classes = useStyles({});
 
   return (

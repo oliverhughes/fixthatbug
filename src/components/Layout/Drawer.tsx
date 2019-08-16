@@ -11,7 +11,6 @@ import InfoIcon from "@material-ui/icons/Info";
 import Link from "next/link";
 import PropTypes from "prop-types";
 import React from "react";
-import { AppDrawerProps } from "../types/";
 
 const useStyles = makeStyles(theme => ({
   list: {
@@ -25,7 +24,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const AppDrawer = ({ drawerOpen, drawerToggle }: AppDrawerProps) => {
+type Props = { drawerOpen: boolean; drawerToggle: Function };
+
+const AppDrawer = ({ drawerOpen, drawerToggle }: Props) => {
   const classes = useStyles({});
 
   return (

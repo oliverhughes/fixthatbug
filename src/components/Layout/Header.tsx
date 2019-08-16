@@ -1,9 +1,14 @@
 import Head from "next/head";
 import PropTypes from "prop-types";
 import React from "react";
-import { HeaderProps } from "../types/";
 
-const Header = ({ title, description, keywords }: HeaderProps) => (
+const defaultProps = {
+  title: "Fix That Bug"
+};
+
+type Props = { description?: string; keywords?: string } & typeof defaultProps;
+
+const Header = ({ title, description, keywords }: Props) => (
   <Head>
     <link rel="icon" type="image/x-icon" href="/static/favicon.png" />
     <title>{title}</title>
@@ -14,9 +19,7 @@ const Header = ({ title, description, keywords }: HeaderProps) => (
   </Head>
 );
 
-Header.defaultProps = {
-  title: "Fix That Bug"
-};
+Header.defaultProps = defaultProps;
 
 Header.propTypes = {
   title: PropTypes.string,

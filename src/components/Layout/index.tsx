@@ -1,12 +1,24 @@
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
-import React, { useState } from "react";
-import { Event } from "../types/";
-import { LayoutProps } from "../types/";
+import React, { ReactNode, useState } from "react";
+import { BsBreakpoints, Event } from "../../types";
 import AppDrawer from "./Drawer";
 import Header from "./Header";
 import Navbar from "./Navbar";
 import ToolCupboard from "./ToolCupboard";
+
+const defaultProps = {
+  contentWidth: "sm",
+  showNav: true
+};
+
+type Props = {
+  children: ReactNode;
+  contentWidth?: BsBreakpoints;
+  title?: string;
+  description?: string;
+  keywords?: string;
+} & typeof defaultProps;
 
 const Layout = ({
   children,
@@ -15,7 +27,7 @@ const Layout = ({
   title,
   description,
   keywords
-}: LayoutProps) => {
+}: Props) => {
   const [drawerOpen, toggleDrawer] = useState(false);
 
   const handleDrawerToggle = (open: boolean) => (event: Event) => {
@@ -41,9 +53,6 @@ const Layout = ({
   );
 };
 
-Layout.defaultProps = {
-  contentWidth: "sm",
-  showNav: true
-};
+Layout.defaultProps = defaultProps;
 
 export default Layout;

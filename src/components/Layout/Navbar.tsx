@@ -6,7 +6,6 @@ import Typography from "@material-ui/core/Typography";
 import MenuIcon from "@material-ui/icons/Menu";
 import PropTypes from "prop-types";
 import React from "react";
-import { NavbarProps } from "../types/";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -17,7 +16,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Navbar = ({ drawerToggle, title }: NavbarProps) => {
+type Props = { drawerToggle: Function; title: string };
+
+const Navbar = ({ drawerToggle, title }: Props) => {
   const classes = useStyles({});
 
   return (
