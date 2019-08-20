@@ -3,15 +3,17 @@ import React, { useEffect, useState } from "react";
 import DisplayMyIp from "../src/components/DisplayMyIp";
 import Layout from "../src/components/Layout";
 
-interface ipData {
+interface IpData {
   ipv4: { ip?: string };
   ipv4Error: string;
   ipv6: { ip?: string };
   ipv6Error: string;
 }
 
-const fetchIps = async (): Promise<{ ipv4: string; ipv6: string }> => {
-  const ipData: ipData = {
+type FetchIps = () => Promise<{ ipv4: string; ipv6: string }>;
+
+const fetchIps: FetchIps = async () => {
+  const ipData: IpData = {
     ipv4: null,
     ipv4Error: null,
     ipv6: null,
