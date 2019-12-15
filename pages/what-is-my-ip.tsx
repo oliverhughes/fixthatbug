@@ -2,6 +2,7 @@ import fetch from "isomorphic-unfetch";
 import React, { useEffect, useState } from "react";
 import DisplayMyIp from "../src/components/DisplayMyIp";
 import Layout from "../src/components/Layout";
+import { logError } from "../src/lib/logger";
 
 interface IpData {
   ipv4: { ip?: string };
@@ -51,6 +52,7 @@ const WhatIsMyIp = () => {
     } catch (err) {
       setIpv4("Could not retrieve IPs :(");
       setIpv6("Could not retrieve IPs :(");
+      logError(err);
     }
   };
 

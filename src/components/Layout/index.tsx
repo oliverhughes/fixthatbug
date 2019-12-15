@@ -1,7 +1,7 @@
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
-import React, { ReactNode, useState } from "react";
-import { BsBreakpoints, Event } from "../../types";
+import { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
+import React, { KeyboardEvent, ReactNode, useState } from "react";
 import AppDrawer from "./Drawer";
 import Header from "./Header";
 import Navbar from "./Navbar";
@@ -12,9 +12,9 @@ const defaultProps = {
   showNav: true
 };
 
-type Props = {
+export type LayoutProps = {
   children: ReactNode;
-  contentWidth?: BsBreakpoints;
+  contentWidth?: Breakpoint;
   title?: string;
   description?: string;
   keywords?: string;
@@ -27,10 +27,10 @@ const Layout = ({
   title,
   description,
   keywords
-}: Props) => {
+}: LayoutProps) => {
   const [drawerOpen, toggleDrawer] = useState(false);
 
-  const handleDrawerToggle = (open: boolean) => (event: Event) => {
+  const handleDrawerToggle = (open: boolean) => (event: KeyboardEvent) => {
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
