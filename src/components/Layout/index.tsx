@@ -1,9 +1,24 @@
-import React, { useState } from "react";
+import Box from "@material-ui/core/Box";
+import Container from "@material-ui/core/Container";
+import { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
+import React, { KeyboardEvent, ReactNode, useState } from "react";
+import AppDrawer from "./Drawer";
 import Header from "./Header";
 import Navbar from "./Navbar";
-import AppDrawer from "./Drawer";
-import Container from "@material-ui/core/Container";
-import Box from "@material-ui/core/Box";
+import ToolCupboard from "./ToolCupboard";
+
+const defaultProps = {
+  contentWidth: "sm",
+  showNav: true
+};
+
+export type LayoutProps = {
+  children: ReactNode;
+  contentWidth?: Breakpoint;
+  title?: string;
+  description?: string;
+  keywords?: string;
+} & typeof defaultProps;
 
 const Layout = ({
   children,
@@ -12,10 +27,10 @@ const Layout = ({
   title,
   description,
   keywords
-}) => {
+}: LayoutProps) => {
   const [drawerOpen, toggleDrawer] = useState(false);
 
-  const handleDrawerToggle = open => event => {
+  const handleDrawerToggle = (open: boolean) => (event: KeyboardEvent) => {
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
@@ -32,14 +47,12 @@ const Layout = ({
       <AppDrawer drawerToggle={handleDrawerToggle} drawerOpen={drawerOpen} />
       <Container maxWidth={contentWidth}>
         <Box my={4}>{children}</Box>
+        <ToolCupboard />
       </Container>
     </>
   );
 };
 
-Layout.defaultProps = {
-  contentWidth: "sm",
-  showNav: true
-};
+Layout.defaultProps = defaultProps;
 
 export default Layout;
