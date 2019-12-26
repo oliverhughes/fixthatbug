@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Link from "next/link";
 import React from "react";
+import { appPages } from "../../lib/appPages";
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -24,6 +25,8 @@ const useStyles = makeStyles(theme => ({
 export default function ToolCupboard() {
   const classes = useStyles({});
 
+  const tools = appPages.filter(({ showInToolCupboard }) => showInToolCupboard);
+
   return (
     <Card className={classes.card}>
       <CardContent>
@@ -34,11 +37,13 @@ export default function ToolCupboard() {
         >
           Tool Cupboard
         </Typography>
-        <Link href="/what-is-my-ip">
-          <Typography>
-            _> <Button size="small">What is my IP</Button>
-          </Typography>
-        </Link>
+        {tools.map(({ href, label }) => (
+          <Link href={href} key={href}>
+            <Typography>
+              _> <Button size="small">{label}</Button>
+            </Typography>
+          </Link>
+        ))}
       </CardContent>
     </Card>
   );
