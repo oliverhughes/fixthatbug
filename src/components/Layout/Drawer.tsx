@@ -6,11 +6,10 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import DevicesIcon from "@material-ui/icons/Devices";
-import InfoIcon from "@material-ui/icons/Info";
 import Link from "next/link";
 import PropTypes from "prop-types";
 import React from "react";
+import { appPages } from "../../lib/appPages";
 
 const useStyles = makeStyles(theme => ({
   list: {
@@ -23,19 +22,6 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2)
   }
 }));
-
-const links = [
-  {
-    label: "What is my IP",
-    href: "/what-is-my-ip",
-    icon: <DevicesIcon />
-  },
-  {
-    label: "About",
-    href: "/",
-    icon: <InfoIcon />
-  }
-];
 
 type Props = { drawerOpen: boolean; drawerToggle: Function };
 
@@ -57,10 +43,12 @@ const AppDrawer = ({ drawerOpen, drawerToggle }: Props) => {
         </Link>
         <Divider />
         <List>
-          {links.map(({ label, href, icon }) => (
+          {appPages.map(({ label, href, Icon }) => (
             <Link key={href} href={href}>
               <ListItem button={true}>
-                <ListItemIcon>{icon}</ListItemIcon>
+                <ListItemIcon>
+                  <Icon />
+                </ListItemIcon>
                 <ListItemText primary={label} />
               </ListItem>
             </Link>
