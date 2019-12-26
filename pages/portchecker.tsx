@@ -1,6 +1,7 @@
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import Layout from "../src/components/Layout";
+import { PortChecker as PortCheckerComponent } from "../src/components/PortChecker";
 
 const PortChecker = () => {
   return (
@@ -16,6 +17,7 @@ const PortChecker = () => {
         Online port checker, check what ports are open on your chosen IP or
         domain name
       </Typography>
+      <PortCheckerComponent />
     </Layout>
   );
 };
