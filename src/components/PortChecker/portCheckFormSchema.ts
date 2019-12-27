@@ -15,6 +15,4 @@ export const portCheckFormSchema = object().shape({
       new RegExp(regex.domain.source + "|" + regex.ip.source),
       domainMessage
     )
-    .required(),
-  testField: string().required()
 });

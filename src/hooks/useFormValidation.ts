@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { ObjectSchema, Shape } from "yup";
+import { ObjectSchema, Shape, ValidationError } from "yup";
 
 interface InitialState {
   [key: string]: string;
+}
+
+interface TouchedFields {
+  [key: string]: boolean;
+  ALL_FIELDS: boolean;
 }
 
 type ValidationSchema = ObjectSchema<
@@ -14,7 +19,10 @@ type ValidationSchema = ObjectSchema<
   >
 >;
 
-type Validate = (values: InitialState) => { [key: string]: string };
+interface Errors {
+  errorFields?: string[];
+  messages?: string[];
+}
 
 export const useFormValidation = (
   initialState: InitialState,
@@ -22,7 +30,10 @@ export const useFormValidation = (
 ) => {
   const [values, setValues] = useState(initialState);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errors, setErrors] = useState({} as InitialState);
+  const [errors, setErrors] = useState({} as Partial<ValidationError>);
+  const [touchedFields, setTouchedFields] = useState({
+    ALL_FIELDS: false
+  } as TouchedFields);
 
   useEffect(() => {
     if (isSubmitting) {
@@ -37,9 +48,19 @@ export const useFormValidation = (
     }
   }, [errors]);
 
-  const handleBlur = () => {
-    // const validationErrors = validate(values);
-    // setErrors(validationErrors);
+  const handleBlur = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTouchedFields({
+      ...touchedFields,
+      [event.target.name]: true
+    });
+    try {
+      await validationSchema.validate(values, {
+        abortEarly: false
+      });
+      setErrors({});
+    } catch (validationError) {
+      setErrors(validationError);
+    }
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,26 +73,42 @@ export const useFormValidation = (
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setIsSubmitting(true);
+    setTouchedFields({ ALL_FIELDS: true });
     try {
       await validationSchema.validate(values, {
         abortEarly: false
       });
-      setIsSubmitting(false);
+      setErrors({});
       try {
+        setIsSubmitting(false);
         console.log("SUBMITTED:", values);
       } catch (err) {
+        setIsSubmitting(false);
         console.log("API Fail....");
       }
     } catch (validationError) {
       setIsSubmitting(false);
+      setErrors(validationError);
       console.log("ERRORS:", validationError);
     }
+  };
+
+  const fieldHasError = (fieldName: string) => {
+    console.log(touchedFields, errors.inner);
+    if (errors.inner) {
+      return (
+        errors.inner.some(({ path }) => path === fieldName) &&
+        (touchedFields[fieldName] || touchedFields.ALL_FIELDS)
+      );
+    }
+    return false;
   };
 
   return {
     handleBlur,
     handleChange,
     handleSubmit,
+    fieldHasError,
     values,
     errors,
     isSubmitting

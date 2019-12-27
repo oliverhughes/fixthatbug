@@ -24,10 +24,14 @@ const INITIAL_STATE = {
 
 const PortCheckForm = () => {
   const classes = useStyles({});
-  const { handleChange, handleSubmit, values } = useFormValidation(
-    INITIAL_STATE,
-    portCheckFormSchema
-  );
+  const {
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    values,
+    fieldHasError,
+    isSubmitting
+  } = useFormValidation(INITIAL_STATE, portCheckFormSchema);
 
   return (
     <form
@@ -43,6 +47,8 @@ const PortCheckForm = () => {
             id="domain-input"
             value={values.domain}
             onChange={handleChange}
+            onBlur={handleBlur}
+            error={fieldHasError("domain")}
             label="IP or Domain"
             helperText="Enter an IP address or a domain name (without http:// or https://)"
             variant="outlined"
@@ -53,11 +59,12 @@ const PortCheckForm = () => {
           <Button
             className={classes.button}
             onClick={handleSubmit}
+            disabled={isSubmitting}
             variant="outlined"
             color="primary"
             size="large"
           >
-            Check
+            {isSubmitting ? "Checking..." : "Check"}
           </Button>
         </Grid>
       </Grid>
