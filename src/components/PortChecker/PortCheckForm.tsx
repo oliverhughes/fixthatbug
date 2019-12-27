@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import React from "react";
 import { useFormValidation } from "../../hooks/useFormValidation";
-import { validatePortCheckForm } from "./validatePortCheckForm";
+import { portCheckFormSchema } from "./portCheckFormSchema";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,7 +26,7 @@ const PortCheckForm = () => {
   const classes = useStyles({});
   const { handleChange, handleSubmit, values } = useFormValidation(
     INITIAL_STATE,
-    validatePortCheckForm
+    portCheckFormSchema
   );
 
   return (
@@ -44,6 +44,7 @@ const PortCheckForm = () => {
             value={values.domain}
             onChange={handleChange}
             label="IP or Domain"
+            helperText="Enter an IP address or a domain name (without http:// or https://)"
             variant="outlined"
             fullWidth={true}
           />
