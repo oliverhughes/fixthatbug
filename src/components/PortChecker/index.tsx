@@ -5,6 +5,7 @@ import Divider from "@material-ui/core/Divider";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
+import { useApi } from "../../hooks/useApi";
 import { PortCheckForm } from "./PortCheckForm";
 
 const useStyles = makeStyles(theme => ({
@@ -25,6 +26,13 @@ const useStyles = makeStyles(theme => ({
 
 const PortChecker = () => {
   const classes = useStyles({});
+  const { apiRequest } = useApi("https://api-url.com");
+
+  const onSubmit = async () => {
+    const response = await apiRequest();
+    console.log("RESPONSE:", response);
+    return response;
+  };
 
   return (
     <Card className={classes.card}>
@@ -36,7 +44,7 @@ const PortChecker = () => {
         </div>
         <Divider variant="middle" />
         <div className={classes.section}>
-          <PortCheckForm />
+          <PortCheckForm onSubmit={onSubmit} />
         </div>
       </CardContent>
     </Card>

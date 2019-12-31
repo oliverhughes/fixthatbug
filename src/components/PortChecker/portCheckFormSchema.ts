@@ -1,4 +1,4 @@
-import { object, string } from "yup";
+import { number, object, string } from "yup";
 
 const regex = {
   domain: /^([a-z\d]([a-z\d\-]{0,61}[a-z\d])?(\.[a-z\d]([a-z\d\-]{0,61}[a-z])[.]?))+$/i,
@@ -14,5 +14,8 @@ export const portCheckFormSchema = object().shape({
     .matches(
       new RegExp(regex.domain.source + "|" + regex.ip.source),
       domainMessage
-    )
+    ),
+  port: number()
+    .moreThan(0)
+    .lessThan(65535)
 });

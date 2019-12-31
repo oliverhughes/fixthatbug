@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ObjectSchema, Shape, ValidationError } from "yup";
 
 interface InitialState {
@@ -19,14 +19,10 @@ type ValidationSchema = ObjectSchema<
   >
 >;
 
-interface Errors {
-  errorFields?: string[];
-  messages?: string[];
-}
-
 export const useFormValidation = (
   initialState: InitialState,
-  validationSchema: ValidationSchema
+  validationSchema: ValidationSchema,
+  onSubmit: () => Promise<any>
 ) => {
   const [values, setValues] = useState(initialState);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -34,19 +30,6 @@ export const useFormValidation = (
   const [touchedFields, setTouchedFields] = useState({
     ALL_FIELDS: false
   } as TouchedFields);
-
-  useEffect(() => {
-    if (isSubmitting) {
-      const noErrors = Object.keys(errors).length === 0;
-      if (noErrors) {
-        console.log("SUBMITTED:", values);
-        setIsSubmitting(false);
-      } else {
-        console.log("THERE WERE ERRORS:", errors);
-        setIsSubmitting(false);
-      }
-    }
-  }, [errors]);
 
   const handleBlur = async (event: React.ChangeEvent<HTMLInputElement>) => {
     setTouchedFields({
@@ -80,8 +63,9 @@ export const useFormValidation = (
       });
       setErrors({});
       try {
-        setIsSubmitting(false);
         console.log("SUBMITTED:", values);
+        await onSubmit();
+        setIsSubmitting(false);
       } catch (err) {
         setIsSubmitting(false);
         console.log("API Fail....");
@@ -94,7 +78,6 @@ export const useFormValidation = (
   };
 
   const fieldHasError = (fieldName: string) => {
-    console.log(touchedFields, errors.inner);
     if (errors.inner) {
       return (
         errors.inner.some(({ path }) => path === fieldName) &&

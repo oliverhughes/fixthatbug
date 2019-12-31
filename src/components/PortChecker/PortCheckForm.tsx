@@ -9,7 +9,7 @@ import { portCheckFormSchema } from "./portCheckFormSchema";
 const useStyles = makeStyles(theme => ({
   root: {
     "& > *": {
-      margin: theme.spacing(1)
+      // margin: theme.spacing(1)
       // width: 200
     }
   },
@@ -19,10 +19,15 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const INITIAL_STATE = {
-  domain: ""
+  domain: "",
+  port: ""
 };
 
-const PortCheckForm = () => {
+export interface PortCheckFormProps {
+  onSubmit: () => Promise<any>;
+}
+
+const PortCheckForm = ({ onSubmit }: PortCheckFormProps) => {
   const classes = useStyles({});
   const {
     handleChange,
@@ -31,7 +36,12 @@ const PortCheckForm = () => {
     values,
     fieldHasError,
     isSubmitting
-  } = useFormValidation(INITIAL_STATE, portCheckFormSchema);
+  } = useFormValidation(INITIAL_STATE, portCheckFormSchema, onSubmit);
+
+  const errors = {
+    domain: fieldHasError("domain"),
+    port: fieldHasError("port")
+  };
 
   return (
     <form
@@ -41,14 +51,14 @@ const PortCheckForm = () => {
       onSubmit={handleSubmit}
     >
       <Grid container={true} spacing={3}>
-        <Grid item={true} sm={9}>
+        <Grid item={true} sm={5}>
           <TextField
             name="domain"
             id="domain-input"
             value={values.domain}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={fieldHasError("domain")}
+            error={errors.domain}
             label="IP or Domain"
             helperText="Enter an IP address or a domain name (without http:// or https://)"
             variant="outlined"
@@ -56,6 +66,25 @@ const PortCheckForm = () => {
           />
         </Grid>
         <Grid item={true} sm={3}>
+          <TextField
+            type="number"
+            name="port"
+            id="port-input"
+            value={values.port}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors.port}
+            label="Port"
+            helperText={
+              errors.port
+                ? "Enter a port between 0 and 65535"
+                : "Port number to check"
+            }
+            variant="outlined"
+            fullWidth={true}
+          />
+        </Grid>
+        <Grid item={true} sm={2}>
           <Button
             className={classes.button}
             onClick={handleSubmit}
